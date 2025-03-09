@@ -1,0 +1,605 @@
+annotations: []
+smart_annotations: []
+nodes:
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n0
+    image_definition: null
+    label: f1-spsw01
+    node_definition: vEOS
+    parameters: {}
+    ram: null
+    tags: []
+    x: -160
+    y: -40
+    interfaces:
+      - id: i0
+        label: l0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Management1
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Eth1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Eth2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Eth3
+        mac_address: null
+        slot: 3
+        type: physical
+      - id: i5
+        label: Eth4
+        mac_address: null
+        slot: 4
+        type: physical
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n1
+    image_definition: null
+    label: f1-lfsw01
+    node_definition: vEOS
+    parameters: {}
+    ram: null
+    tags: []
+    x: -280
+    y: 160
+    interfaces:
+      - id: i0
+        label: l0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Management1
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Eth1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Eth2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Eth3
+        mac_address: null
+        slot: 3
+        type: physical
+      - id: i5
+        label: Eth4
+        mac_address: null
+        slot: 4
+        type: physical
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n2
+    image_definition: null
+    label: f1-bdsw01
+    node_definition: vEOS
+    parameters: {}
+    ram: null
+    tags: []
+    x: 0
+    y: 160
+    interfaces:
+      - id: i0
+        label: l0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Management1
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Eth1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Eth2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Eth3
+        mac_address: null
+        slot: 3
+        type: physical
+      - id: i5
+        label: Eth4
+        mac_address: null
+        slot: 4
+        type: physical
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n3
+    image_definition: null
+    label: f1-bdsw02
+    node_definition: vEOS
+    parameters: {}
+    ram: null
+    tags: []
+    x: 160
+    y: 160
+    interfaces:
+      - id: i0
+        label: l0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Management1
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Eth1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Eth2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Eth3
+        mac_address: null
+        slot: 3
+        type: physical
+      - id: i5
+        label: Eth4
+        mac_address: null
+        slot: 4
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: default
+        content: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n4
+    image_definition: null
+    label: mgmtnw(f1-spsw01)
+    node_definition: external_connector
+    parameters: {}
+    ram: null
+    tags: []
+    x: -320
+    y: -40
+    interfaces:
+      - id: i0
+        label: port
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: default
+        content: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n5
+    image_definition: null
+    label: mgmtnw(f1-lfsw01)
+    node_definition: external_connector
+    parameters: {}
+    ram: null
+    tags: []
+    x: -400
+    y: 160
+    interfaces:
+      - id: i0
+        label: port
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: default
+        content: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n6
+    image_definition: null
+    label: mgmtnw(f1-bdsw01)
+    node_definition: external_connector
+    parameters: {}
+    ram: null
+    tags: []
+    x: -120
+    y: 160
+    interfaces:
+      - id: i0
+        label: port
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: default
+        content: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n7
+    image_definition: null
+    label: mgmtnw(f1-bdsw02)
+    node_definition: external_connector
+    parameters: {}
+    ram: null
+    tags: []
+    x: 280
+    y: 160
+    interfaces:
+      - id: i0
+        label: port
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: iosxe_config.txt
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname tenant1-server01
+          # configurable user account
+          USERNAME=cisco
+          PASSWORD=cisco
+          # no password for tc user by default
+          TC_PASSWORD=
+          modprobe 8021q
+          vconfig add eth0 100
+          ifconfig eth0.100 up
+          ifconfig eth0.100 172.16.0.1 netmask 255.255.255.0 up
+          route add -net 0.0.0.0/0 gw 172.16.0.254 dev eth0.100
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n8
+    image_definition: null
+    label: tenant1-server01
+    node_definition: server
+    parameters: {}
+    ram: null
+    tags: []
+    x: -400
+    y: 320
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: user-data
+        content: |-
+          #cloud-config
+          hostname: tenant1-server02
+          manage_etc_hosts: True
+          system_info:
+            default_user:
+              name: cisco
+          password: cisco
+          chpasswd: { expire: False }
+          ssh_pwauth: True
+          ssh_authorized_keys:
+            - your-ssh-pubkey-line-goes-here
+          bootcmd:
+            - |
+              if [ ! -e "/etc/systemd/network/10-bond0.link" ]; then
+              echo "[Match]
+              OriginalName=ens2
+              OriginalName=ens3
+              [Link]
+              Duplex=full
+              BitsPerSecond=1000M" | tee /etc/systemd/network/10-bond0.link
+              chmod +x /etc/systemd/network/10-bond0.link
+              reboot
+              fi
+      - name: network-config
+        content: |-
+          #network-config
+          network:
+            version: 2
+            ethernets:
+              ens2:
+                optional: true
+              ens3:
+                optional: true
+            bonds:
+              bond0:
+                interfaces: [ens2, ens3]
+                parameters:
+                  mode: 802.3ad
+                  lacp-rate: fast
+            vlans:
+              bond0.100:
+                id: 100
+                link: bond0
+                addresses:
+                  - 172.16.0.2/24
+                gateway4: 172.16.0.254
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n9
+    image_definition: null
+    label: tenant1-server02
+    node_definition: ubuntu
+    parameters: {}
+    ram: null
+    tags: []
+    x: 80
+    y: 320
+    interfaces:
+      - id: i0
+        label: ens2
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i1
+        label: ens3
+        mac_address: null
+        slot: 1
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: iosxe_config.txt
+        content: |-
+          # this is a shell script which will be sourced at boot
+          hostname tenant1-server03
+          # configurable user account
+          USERNAME=cisco
+          PASSWORD=cisco
+          # no password for tc user by default
+          TC_PASSWORD=
+          modprobe 8021q
+          vconfig add eth0 200
+          ifconfig eth0.200 up
+          ifconfig eth0.200 172.16.1.1 netmask 255.255.255.0 up
+          route add -net 0.0.0.0/0 gw 172.16.1.254 dev eth0.200
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n10
+    image_definition: null
+    label: tenant1-server03
+    node_definition: server
+    parameters: {}
+    ram: null
+    tags: []
+    x: -240
+    y: 320
+    interfaces:
+      - id: i0
+        label: eth0
+        mac_address: null
+        slot: 0
+        type: physical
+  - boot_disk_size: null
+    configuration: []
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n11
+    image_definition: null
+    label: f1-spsw02
+    node_definition: vEOS
+    parameters: {}
+    ram: null
+    tags: []
+    x: 0
+    y: -40
+    interfaces:
+      - id: i0
+        label: l0
+        mac_address: null
+        type: loopback
+      - id: i1
+        label: Management1
+        mac_address: null
+        slot: 0
+        type: physical
+      - id: i2
+        label: Eth1
+        mac_address: null
+        slot: 1
+        type: physical
+      - id: i3
+        label: Eth2
+        mac_address: null
+        slot: 2
+        type: physical
+      - id: i4
+        label: Eth3
+        mac_address: null
+        slot: 3
+        type: physical
+      - id: i5
+        label: Eth4
+        mac_address: null
+        slot: 4
+        type: physical
+  - boot_disk_size: null
+    configuration:
+      - name: default
+        content: System Bridge
+    cpu_limit: null
+    cpus: null
+    data_volume: null
+    hide_links: false
+    id: n12
+    image_definition: null
+    label: mgmtnw(f1-spsw02)
+    node_definition: external_connector
+    parameters: {}
+    ram: null
+    tags: []
+    x: 160
+    y: -40
+    interfaces:
+      - id: i0
+        label: port
+        mac_address: null
+        slot: 0
+        type: physical
+links:
+  - id: l0
+    n1: n4
+    n2: n0
+    i1: i0
+    i2: i1
+    conditioning: {}
+    label: ext-conn-0-port<->veos-0-Management1
+  - id: l1
+    n1: n5
+    n2: n1
+    i1: i0
+    i2: i1
+    conditioning: {}
+    label: ext-conn-1-port<->veos-1-Management1
+  - id: l2
+    n1: n6
+    n2: n2
+    i1: i0
+    i2: i1
+    conditioning: {}
+    label: ext-conn-2-port<->veos-2-Management1
+  - id: l3
+    n1: n7
+    n2: n3
+    i1: i0
+    i2: i1
+    conditioning: {}
+    label: ext-conn-3-port<->veos-3-Management1
+  - id: l4
+    n1: n0
+    n2: n1
+    i1: i2
+    i2: i5
+    conditioning: {}
+    label: veos-0-Eth1<->veos-1-Eth4
+  - id: l5
+    n1: n0
+    n2: n2
+    i1: i4
+    i2: i5
+    conditioning: {}
+    label: veos-0-Eth3<->veos-2-Eth4
+  - id: l6
+    n1: n0
+    n2: n3
+    i1: i5
+    i2: i5
+    conditioning: {}
+    label: veos-0-Eth4<->veos-3-Eth4
+  - id: l7
+    n1: n1
+    n2: n8
+    i1: i2
+    i2: i0
+    conditioning: {}
+    label: veos-1-Eth1<->server-0-eth0
+  - id: l8
+    n1: n9
+    n2: n2
+    i1: i0
+    i2: i2
+    conditioning: {}
+    label: ubuntu-0-ens2<->veos-2-Eth1
+  - id: l9
+    n1: n9
+    n2: n3
+    i1: i1
+    i2: i2
+    conditioning: {}
+    label: ubuntu-0-ens3<->veos-3-Eth1
+  - id: l10
+    n1: n10
+    n2: n1
+    i1: i0
+    i2: i3
+    conditioning: {}
+    label: tenant1-server03-eth0<->f1-lfsw01-Eth2
+  - id: l11
+    n1: n12
+    n2: n11
+    i1: i0
+    i2: i1
+    conditioning: {}
+    label: mgmtnw(f1-spsw02)-port<->f1-spsw02-Management1
+  - id: l12
+    n1: n1
+    n2: n11
+    i1: i4
+    i2: i2
+    conditioning: {}
+    label: f1-lfsw01-Eth3<->f1-spsw02-Eth1
+  - id: l13
+    n1: n2
+    n2: n3
+    i1: i3
+    i2: i3
+    conditioning: {}
+    label: f1-bdsw01-Eth2<->f1-bdsw02-Eth2
+  - id: l14
+    n1: n2
+    n2: n11
+    i1: i4
+    i2: i4
+    conditioning: {}
+    label: f1-bdsw01-Eth3<->f1-spsw02-Eth3
+  - id: l15
+    n1: n3
+    n2: n11
+    i1: i4
+    i2: i5
+    conditioning: {}
+    label: f1-bdsw02-Eth3<->f1-spsw02-Eth4
+lab:
+  description: ''
+  notes: ''
+  title: Arista_EOS_fabric
+  version: 0.3.0
