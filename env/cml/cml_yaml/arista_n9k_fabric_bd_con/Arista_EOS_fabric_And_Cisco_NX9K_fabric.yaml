@@ -832,8 +832,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Sun Mar  9 22:19:00 2025
-          !Time: Sun Mar  9 22:19:01 2025
+          !Running configuration last done at: Sat Mar 15 19:10:08 2025
+          !Time: Sat Mar 15 19:10:09 2025
 
           version 10.5(1) Bios:version
           hostname f2-bdsw01
@@ -916,6 +916,7 @@ nodes:
 
           interface Ethernet1/1
             description f1-bdsw01 Eth1
+            lacp rate fast
             switchport mode trunk
             switchport trunk allowed vlan 2010
             channel-group 11 mode active
@@ -1202,8 +1203,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Sun Mar  9 22:19:09 2025
-          !Time: Sun Mar  9 22:19:09 2025
+          !Running configuration last done at: Sat Mar 15 19:10:18 2025
+          !Time: Sat Mar 15 19:10:19 2025
 
           version 10.5(1) Bios:version
           hostname f2-bdsw02
@@ -1286,6 +1287,7 @@ nodes:
 
           interface Ethernet1/1
             description f1-bdsw02 Eth1
+            lacp rate fast
             switchport mode trunk
             switchport trunk allowed vlan 2010
             channel-group 11 mode active
