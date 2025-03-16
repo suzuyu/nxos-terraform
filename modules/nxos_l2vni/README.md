@@ -10,6 +10,7 @@
   - 機器ごとに変更可能
 - SVI
   - anycast gateway で設定する
+    - dualstackの場合は `ipv6 nd suppress-ra` を設定する
 - nve への vni 追加
   - ingress-replication で設定
 - evpn へ vni 追加
@@ -20,6 +21,7 @@
 - `feature nxapi` が機器側で設定済み
 - Gateway になる SVI 作成で `gateway_ip` を指定する場合は所属 `vrf` を事前構築済みであること
   - L2VPN のみで `gateway_ip` は不要の場合は `vrf` の事前作成は不要。`vrf` パラメータは各種 description の名前としてのみ使用する
+  - IPv6 でのゲートウェイは `gateway_ipv6` で指定する (option)
   - vrf 作成は `../nxos_l3vni` で構築可能
 - AnyCast Gateway 設定済みであること
   - 例： `fabric forwarding anycast-gateway-mac 2020.0000.00aa`
@@ -34,6 +36,7 @@ vrf = "tenant2-vpc1"
 
 segment_name = "server-seg1"
 gateway_ip   = "172.17.0.254/24"
+# gateway_ipv6 = "fd12::1/64"
 
 members = {
   lfsw01 = {
@@ -128,3 +131,7 @@ evpn
 !
 end
 ```
+
+## 補足
+
+nxos provider v0.5.8 時点では Interface への IPv6 設定モジュールが見当たらないため、REST モジュールでの対応をしている

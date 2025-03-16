@@ -82,6 +82,85 @@ resource "nxos_ipv4_interface_address" "main" {
   ]
 }
 
+# provider nx-os v0.5.8 時点で対応モジュールが見当たらなかったため REST で対応
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/rest
+resource "nxos_rest" "ipv6_dom" {
+  for_each   = { for k, v in var.members : k => v if var.gateway_ipv6 != null }
+  device     = each.key
+  dn         = "sys/ipv6/inst"
+  class_name = "ipv6Dom"
+  content = {
+    dn   = "sys/ipv6/inst/dom-default"
+    name = "default"
+    rn   = "dom-default"
+  }
+
+  depends_on = [
+    nxos_hmm_interface.main,
+  ]
+}
+
+# provider nxos v0.5.8 時点で対応モジュールが見当たらなかったため REST で対応
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/rest
+resource "nxos_rest" "ipv6_if" {
+  for_each   = { for k, v in var.members : k => v if var.gateway_ipv6 != null }
+  device     = each.key
+  dn         = "sys/ipv6/inst/dom-default"
+  class_name = "ipv6If"
+  content = {
+    autoconfig = "disabled"
+    dn         = "sys/ipv6/inst/dom-default/if-[vlan${each.value.vlan}]"
+    id         = "vlan${each.value.vlan}"
+    rn         = "if-[vlan${each.value.vlan}]"
+  }
+
+  depends_on = [
+    nxos_rest.ipv6_dom,
+  ]
+}
+
+# provider nxos v0.5.8 時点で対応モジュールが見当たらなかったため REST で対応
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/rest
+resource "nxos_rest" "ipv6_addr" {
+  for_each   = { for k, v in var.members : k => v if var.gateway_ipv6 != null }
+  device     = each.key
+  dn         = "sys/ipv6/inst/dom-default/if-[vlan${each.value.vlan}]/addr-[${var.gateway_ipv6}]"
+  class_name = "ipv6Addr"
+  content = {
+    addr                  = var.gateway_ipv6
+    aggregatePrefixLength = "unspecified"
+    pref                  = "0"
+    rn                    = "addr-[${var.gateway_ipv6}]"
+    tag                   = "0"
+    useBia                = "disabled"
+  }
+
+  depends_on = [
+    nxos_rest.ipv6_dom,
+    nxos_rest.ipv6_if,
+  ]
+}
+
+# provider nxos v0.5.8 時点で対応モジュールが見当たらなかったため REST で対応
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/rest
+resource "nxos_rest" "ipv6_nd" {
+  for_each   = { for k, v in var.members : k => v if var.gateway_ipv6 != null }
+  device     = each.key
+  dn         = "sys/nd/inst/dom-default"
+  class_name = "ndIf"
+  content = {
+    ctrl = "suppress-ra"
+    dn   = "sys/nd/inst/dom-default/if-[vlan${each.value.vlan}]"
+    id   = "vlan${each.value.vlan}"
+    rn   = "if-[vlan${each.value.vlan}]"
+  }
+
+  depends_on = [
+    nxos_rest.ipv6_addr,
+  ]
+}
+
+
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/nve_vni
 resource "nxos_nve_vni" "main" {
   for_each      = var.members

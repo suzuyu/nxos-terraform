@@ -48,6 +48,17 @@ resource "nxos_vrf_address_family" "main" {
     nxos_vrf_routing.main,
   ]
 }
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_address_family
+resource "nxos_vrf_address_family" "main_ipv6" {
+  for_each       = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device         = each.key
+  vrf            = var.vrf
+  address_family = "ipv6-ucast"
+
+  depends_on = [
+    nxos_vrf_routing.main,
+  ]
+}
 
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_address_family
 resource "nxos_vrf_route_target_address_family" "main" {
@@ -56,6 +67,19 @@ resource "nxos_vrf_route_target_address_family" "main" {
   vrf                         = var.vrf
   address_family              = "ipv4-ucast"
   route_target_address_family = "ipv4-ucast"
+
+  depends_on = [
+    nxos_vrf_address_family.main,
+  ]
+}
+
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_address_family
+resource "nxos_vrf_route_target_address_family" "main_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "ipv6-ucast"
 
   depends_on = [
     nxos_vrf_address_family.main,
@@ -76,6 +100,21 @@ resource "nxos_vrf_route_target_direction" "import" {
   ]
 }
 
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_direction
+resource "nxos_vrf_route_target_direction" "import_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "ipv6-ucast"
+  direction                   = "import"
+
+  depends_on = [
+    nxos_vrf_route_target_address_family.main,
+  ]
+}
+
+
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target
 resource "nxos_vrf_route_target" "import" {
   for_each                    = var.members
@@ -83,6 +122,21 @@ resource "nxos_vrf_route_target" "import" {
   vrf                         = var.vrf
   address_family              = "ipv4-ucast"
   route_target_address_family = "ipv4-ucast"
+  direction                   = "import"
+  route_target                = "route-target:unknown:0:0"
+
+  depends_on = [
+    nxos_vrf_route_target_direction.import,
+  ]
+}
+
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target
+resource "nxos_vrf_route_target" "import_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "ipv6-ucast"
   direction                   = "import"
   route_target                = "route-target:unknown:0:0"
 
@@ -106,6 +160,20 @@ resource "nxos_vrf_route_target_direction" "export" {
   ]
 }
 
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_direction
+resource "nxos_vrf_route_target_direction" "export_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "ipv6-ucast"
+  direction                   = "export"
+
+  depends_on = [
+    nxos_vrf_route_target_address_family.main,
+  ]
+}
+
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target
 resource "nxos_vrf_route_target" "export" {
   for_each                    = var.members
@@ -113,6 +181,21 @@ resource "nxos_vrf_route_target" "export" {
   vrf                         = var.vrf
   address_family              = "ipv4-ucast"
   route_target_address_family = "ipv4-ucast"
+  direction                   = "export"
+  route_target                = "route-target:unknown:0:0"
+
+  depends_on = [
+    nxos_vrf_route_target_direction.export,
+  ]
+}
+
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target
+resource "nxos_vrf_route_target" "export_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "ipv6-ucast"
   direction                   = "export"
   route_target                = "route-target:unknown:0:0"
 
@@ -134,6 +217,20 @@ resource "nxos_vrf_route_target_address_family" "main_evpn" {
   ]
 }
 
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_address_family
+resource "nxos_vrf_route_target_address_family" "main_evpn_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "l2vpn-evpn"
+
+  depends_on = [
+    nxos_vrf_address_family.main,
+  ]
+}
+
+
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_direction
 resource "nxos_vrf_route_target_direction" "import_evpn" {
   for_each                    = var.members
@@ -145,6 +242,20 @@ resource "nxos_vrf_route_target_direction" "import_evpn" {
 
   depends_on = [
     nxos_vrf_route_target_address_family.main_evpn,
+  ]
+}
+
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_direction
+resource "nxos_vrf_route_target_direction" "import_evpn_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "l2vpn-evpn"
+  direction                   = "import"
+
+  depends_on = [
+    nxos_vrf_route_target_address_family.main_evpn_ipv6,
   ]
 }
 
@@ -163,6 +274,22 @@ resource "nxos_vrf_route_target" "import_evpn" {
   ]
 }
 
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target
+resource "nxos_vrf_route_target" "import_evpn_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "l2vpn-evpn"
+  direction                   = "import"
+  route_target                = "route-target:unknown:0:0"
+
+  depends_on = [
+    nxos_vrf_route_target_direction.import_evpn_ipv6,
+  ]
+}
+
+
 
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_direction
 resource "nxos_vrf_route_target_direction" "export_evpn" {
@@ -178,6 +305,21 @@ resource "nxos_vrf_route_target_direction" "export_evpn" {
   ]
 }
 
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target_direction
+resource "nxos_vrf_route_target_direction" "export_evpn_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "l2vpn-evpn"
+  direction                   = "export"
+
+  depends_on = [
+    nxos_vrf_route_target_address_family.main_evpn_ipv6,
+  ]
+}
+
+
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target
 resource "nxos_vrf_route_target" "export_evpn" {
   for_each                    = var.members
@@ -190,6 +332,21 @@ resource "nxos_vrf_route_target" "export_evpn" {
 
   depends_on = [
     nxos_vrf_route_target_direction.export_evpn,
+  ]
+}
+
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/vrf_route_target
+resource "nxos_vrf_route_target" "export_evpn_ipv6" {
+  for_each                    = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device                      = each.key
+  vrf                         = var.vrf
+  address_family              = "ipv6-ucast"
+  route_target_address_family = "l2vpn-evpn"
+  direction                   = "export"
+  route_target                = "route-target:unknown:0:0"
+
+  depends_on = [
+    nxos_vrf_route_target_direction.export_evpn_ipv6,
   ]
 }
 
@@ -231,6 +388,44 @@ resource "nxos_ipv4_interface" "main" {
   ]
 }
 
+# provider nxos v0.5.8 時点で対応モジュールが見当たらなかったため REST で対応
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/rest
+resource "nxos_rest" "ipv6_dom" {
+  for_each   = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device     = each.key
+  dn         = "sys/ipv6/inst"
+  class_name = "ipv6Dom"
+  content = {
+    dn   = "sys/ipv6/inst/dom-default"
+    name = "default"
+    rn   = "dom-default"
+  }
+
+  depends_on = [
+    nxos_svi_interface.main,
+  ]
+}
+
+# provider nxos v0.5.8 時点で対応モジュールが見当たらなかったため REST で対応
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/rest
+resource "nxos_rest" "ipv6_use_link_local_addr" {
+  for_each   = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device     = each.key
+  dn         = "sys/ipv6/inst/dom-default"
+  class_name = "ipv6If"
+  content = {
+    autoconfig       = "disabled"
+    dn               = "sys/ipv6/inst/dom-default/if-[vlan${each.value.vlan}]"
+    id               = "vlan${each.value.vlan}"
+    rn               = "if-[vlan${each.value.vlan}]"
+    useLinkLocalAddr = "enabled"
+  }
+
+  depends_on = [
+    nxos_rest.ipv6_dom,
+  ]
+}
+
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/nve_vni
 resource "nxos_nve_vni" "main" {
   for_each      = var.members
@@ -268,6 +463,20 @@ resource "nxos_bgp_address_family" "main" {
   ]
 }
 
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/bgp_address_family
+resource "nxos_bgp_address_family" "main_ipv6" {
+  for_each       = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device         = each.key
+  asn            = var.asn
+  vrf            = var.vrf
+  address_family = "ipv6-ucast"
+
+  depends_on = [
+    nxos_bgp_vrf.main,
+  ]
+}
+
+
 # https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/bgp_route_redistribution
 resource "nxos_bgp_route_redistribution" "main" {
   for_each          = var.members
@@ -278,6 +487,22 @@ resource "nxos_bgp_route_redistribution" "main" {
   protocol          = "direct"
   protocol_instance = "none"
   route_map         = var.redistribute_route_map
+
+  depends_on = [
+    nxos_bgp_address_family.main,
+  ]
+}
+
+# https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/bgp_route_redistribution
+resource "nxos_bgp_route_redistribution" "main_ipv6" {
+  for_each          = { for k, v in var.members : k => v if var.dualstack_enable == true }
+  device            = each.key
+  asn               = var.asn
+  vrf               = var.vrf
+  address_family    = "ipv6-ucast"
+  protocol          = "direct"
+  protocol_instance = "none"
+  route_map         = var.redistribute_route_map_v6
 
   depends_on = [
     nxos_bgp_address_family.main,

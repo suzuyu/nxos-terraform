@@ -27,10 +27,15 @@
   - `interface nve1` を構築済み
   - direct (connected) の IP を再配送するために `route-map` が設定済みであること
     - `permit-all-v4` という route-map が前提で `variables.tf` の default 設定もしくは呼び出し時に変更可能
-    - 設定例は下記
-      - `ip prefix-list all-v4 seq 10 permit 0.0.0.0/0 ge 1 le 32`
-      - `route-map permit-all-v4 permit 100`
-      - `match ip address prefix-list all-v4`
+      - 設定例は下記
+        - `ip prefix-list all-v4 seq 10 permit 0.0.0.0/0 ge 1 le 32`
+        - `route-map permit-all-v4 permit 100`
+        - `match ip address prefix-list all-v4`
+    - IPv6 の場合も IPv4 同様な route-map を前提にしている
+      - 設定例は下記
+        - `ipv6 prefix-list all-v6 seq 10 permit 0::/0 ge 1 le 128`
+        - `route-map permit-all-v6 permit 100`
+        - `match ipv6 address prefix-list all-v6`
 
 ## パラメータ例
 
@@ -39,6 +44,7 @@
 ```tfvars
 vni = 29001
 vrf = "tenant2-vpc1"
+# dualstack_enable = true
 members = {
   lfsw01 = {
     vlan = "3002"
@@ -108,3 +114,7 @@ router bgp 65001
 !
 end
 ```
+
+## 補足
+
+nxos provider v0.5.8 時点では Interface への IPv6 設定モジュールが見当たらないため、REST モジュールでの対応をしている
