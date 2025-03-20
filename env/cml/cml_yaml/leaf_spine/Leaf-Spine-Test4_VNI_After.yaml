@@ -224,8 +224,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Sun Mar 16 17:40:58 2025
-          !Time: Sun Mar 16 17:40:58 2025
+          !Running configuration last done at: Thu Mar 20 10:20:25 2025
+          !Time: Thu Mar 20 10:20:25 2025
 
           version 10.5(1) Bios:version
           hostname lfsw01
@@ -1181,8 +1181,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Mon Feb 24 14:58:31 2025
-          !Time: Mon Feb 24 14:58:32 2025
+          !Running configuration last done at: Thu Mar 20 01:19:39 2025
+          !Time: Thu Mar 20 01:19:39 2025
 
           version 10.5(1) Bios:version
           hostname spsw01
@@ -1257,6 +1257,7 @@ nodes:
             ip address 10.0.3.7/31
             ip ospf network point-to-point
             ip router ospf 1 area 0.0.0.0
+            no shutdown
 
           interface Ethernet1/5
             description bdsw01 eth1/48
@@ -1387,7 +1388,7 @@ nodes:
 
           interface mgmt0
             vrf member management
-            ip address 192.168.129.59/24
+            ip address 192.168.129.79/24
 
           interface loopback0
             ip address 10.0.0.254/32
@@ -1525,8 +1526,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Sun Mar 16 17:41:25 2025
-          !Time: Sun Mar 16 17:41:26 2025
+          !Running configuration last done at: Thu Mar 20 10:20:20 2025
+          !Time: Thu Mar 20 10:20:21 2025
 
           version 10.5(1) Bios:version
           hostname lfsw02
@@ -2121,8 +2122,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Mon Feb 24 14:58:37 2025
-          !Time: Mon Feb 24 14:58:37 2025
+          !Running configuration last done at: Thu Mar 20 01:19:42 2025
+          !Time: Thu Mar 20 01:19:42 2025
 
           version 10.5(1) Bios:version
           hostname spsw02
@@ -2197,6 +2198,7 @@ nodes:
             ip address 10.0.4.7/31
             ip ospf network point-to-point
             ip router ospf 1 area 0.0.0.0
+            no shutdown
 
           interface Ethernet1/5
             description bdsw01 eth1/47
@@ -2327,7 +2329,7 @@ nodes:
 
           interface mgmt0
             vrf member management
-            ip address 192.168.129.58/24
+            ip address 192.168.129.78/24
 
           interface loopback0
             ip address 10.0.0.253/32
@@ -2631,14 +2633,14 @@ nodes:
                   mode: 802.3ad
                   lacp-rate: fast
             vlans:
-              bond0.1001:
-                id: 1001
+              bond0.2001:
+                id: 2001
                 link: bond0
                 addresses:
-                  - 192.168.133.31/24
-                  - fd12::100/108
-                gateway4: 192.168.133.1
-                gateway6: fd12::1
+                  - 100.64.0.1/24
+                  - fd12:0:0:1::101/64
+                gateway4: 100.64.0.254
+                gateway6: fd12:0:0:1::1
     cpu_limit: null
     cpus: null
     data_volume: null
@@ -2669,8 +2671,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Sun Mar 16 17:41:29 2025
-          !Time: Sun Mar 16 17:41:29 2025
+          !Running configuration last done at: Thu Mar 20 10:19:59 2025
+          !Time: Thu Mar 20 10:19:59 2025
 
           version 10.5(1) Bios:version
           hostname lfsw03
@@ -3225,8 +3227,8 @@ nodes:
         content: |2-
 
           !Command: show running-config
-          !Running configuration last done at: Sun Mar 16 17:41:39 2025
-          !Time: Sun Mar 16 17:41:39 2025
+          !Running configuration last done at: Thu Mar 20 10:20:27 2025
+          !Time: Thu Mar 20 10:20:27 2025
 
           version 10.5(1) Bios:version
           hostname lfsw04

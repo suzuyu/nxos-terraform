@@ -52,4 +52,4 @@ id_rsa*
 # # tfvars
 # *.tfvars
 
-/test/*
+test/*

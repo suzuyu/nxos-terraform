@@ -12,6 +12,7 @@
   - import/export は bouth auto で設定する
 - SVI
   - vrf と ip forward で設定する
+    - dualstack の場合は `dualstack_enable = true` を設定パラメータに追加すると、`ipv6 address use-link-local-only` を設定する
 - nve への vni 追加
   - associate-vrf で設定
 - router bgp へ vrf の追加と direct 再配送
